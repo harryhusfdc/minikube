@@ -26,6 +26,7 @@ resource "kubernetes_deployment" "my_deployment" {
       spec {
         container {
           image = "nginx"
+          image_pull_policy = "Always"
           name  = "nginx-container"
           port {
             container_port = 80
