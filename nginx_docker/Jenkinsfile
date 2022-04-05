@@ -2,9 +2,11 @@ pipeline{
     stage('Create Image'){
         steps{
             echo "Creating image"
+            sh """
             pwd
             docker build -f Dockersfile -t harryhu/simple-nginx:0.0.1 nginx_docker
             docker push harryhu/simple-nginx:0.0.1
+            """
         }
     }
 }
