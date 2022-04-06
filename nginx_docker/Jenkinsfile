@@ -8,7 +8,7 @@ pipeline{
                 dir("${env.WORKSPACE}"){
                     sh """
                         pwd
-                        docker build -f nginx_docker/Dockersfile -t harryhu/simple-nginx:0.0.1 nginx_docker
+                        docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
                         docker push harryhu/simple-nginx:0.0.1
                     """
                 }
