@@ -8,12 +8,14 @@ pipeline{
     stages{
         stage("Create Image"){
             steps{
-                script{
-                    dockerImage = docker.build registry
+                dir("${env.WORKSPACE}/nginx_docker"){
+                    script{
+                        dockerImage = docker.build registry
+                    }
                 }
             }
         }
-        stage("Cush image"){
+        stage("Push image"){
             steps{
                 script{
                     docker.withRegistry("", registryCredential){
