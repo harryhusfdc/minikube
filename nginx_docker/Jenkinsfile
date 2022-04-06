@@ -9,8 +9,8 @@ pipeline{
                     sh """
                         whoami
                         pwd
-                        docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
-                        docker push harryhu/simple-nginx:0.0.1
+                        sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
+                        sudo docker push harryhu/simple-nginx:0.0.1
                     """
                 }
             }
