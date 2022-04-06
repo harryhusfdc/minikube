@@ -36,12 +36,20 @@ curl https://get.docker.com/ > dockerinstall
 chmod 777 dockerinstall
 ./dockerinstall
 ```
-
+Install sudo, vi
 ```sh
 apt-get update
 apt-get -y install sudo
 apt-get -y install vim
 
+#add jenkins user to sudoer
+usermod -aG sudo jenkins
+
+```
+
+Add following line to /etc/sudoers with vi to allow jenkins user to run sudo without providing password
+```
+jenkins ALL=(ALL) NOPASSWD: ALL
 ```
 
 Exit the Jenkins container and run the following command to add security

@@ -12,11 +12,18 @@ pipeline{
                             pwd
                             sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
                         """
-                        sh('echo $DOCKERHUB_PWD | sudo docker login -u=${DOCKHUB_USER} --password-stdin')
-                        sh('sudo docker push harryhu/simple-nginx:0.0.1')
                     }
                 }
             }
+        }
+        stage("Push Image"){
+            withCredentials([usernamePassword(credentialsId: 'DockerHubAccount', passwordVariable: 'DOCKERHUB_PWD', usernameVariable: 'DOCKHUB_USER')]) {
+                sh('echo $DOCKERHUB_PWD | sudo docker login -u=${DOCKHUB_USER} --password-stdin')
+                sh('sudo docker push harryhu/simple-nginx:0.0.1')
+            }
+        }
+        Stage("Cleanup"){
+            sh('sudo docker rmi harryhu/simple-nginx:0.0.1')
         }
     }
 }
