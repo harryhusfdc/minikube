@@ -22,7 +22,7 @@ pipeline{
                 sh('sudo docker push harryhu/simple-nginx:0.0.1')
             }
         }
-        Stage("Cleanup"){
+        stage("Cleanup"){
             sh('sudo docker rmi harryhu/simple-nginx:0.0.1')
         }
     }
