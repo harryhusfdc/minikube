@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "my_deployment" {
       }
       spec {
         container {
-          image = "nginx"
+          image = "harryhu/simple-nginx:0.0.1"
           image_pull_policy = "Always"
           name  = "nginx-container"
           port {
