@@ -1,0 +1,31 @@
+pipeline{
+    environment{
+        registry = "harryhu/simple-nginx:0.0.1"
+        registryCredential = "MyDockerHubAccount"
+        dockerImage = ""
+    }
+    agent any
+    stages{
+        stage("Create Image"){
+            steps{
+                script{
+                    dockerImage = docker.build registry
+                }
+            }
+        }
+        stage("Cush image"){
+            steps{
+                script{
+                    docker.withRegistry("", registryCredential){
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage("Cleanup"){
+            steps{
+                sh "docker rmi $registry"
+            }
+        }
+    }
+}

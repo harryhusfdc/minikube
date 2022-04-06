@@ -8,6 +8,12 @@
 - Minikube
 - Helm
 
+## Required Accounts ##
+- GitHub
+- Dockerhub
+
+----
+
 ## Docker Install ##
 
 https://docs.docker.com/desktop/mac/install/
@@ -37,3 +43,14 @@ https://helm.sh/docs/intro/quickstart/
 ```
 brew install helm
 ```
+## GitHub Account ##
+
+https://github.com/
+
+Create personal git repositories. Generate a personal access token. 
+
+## Dockerhub Account ##
+
+https://hub.docker.com/
+
+Create personal docker repositories.
