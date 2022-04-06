@@ -4,7 +4,8 @@ pipeline{
         stage('Create Image'){
             steps{
                 echo "Creating image"
-                dir("${env.WORKSPACE}"){
+                echo ${env.WORKSPACE}
+                dir("${env.WORKSPACE}/Example1"){
                     sh """
                         pwd
                         docker build -f nginx_docker/Dockersfile -t harryhu/simple-nginx:0.0.1 nginx_docker
