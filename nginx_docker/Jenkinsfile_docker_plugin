@@ -9,9 +9,11 @@ pipeline{
         stage("Create Image"){
             steps{
                 dir("${env.WORKSPACE}/nginx_docker"){
-                    script{
-                        dockerImage = docker.build registry
-                    }
+                    sh """
+                        whoami
+                        pwd
+                        sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
+                    """
                 }
             }
         }
