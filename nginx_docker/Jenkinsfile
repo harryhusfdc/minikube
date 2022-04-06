@@ -1,3 +1,6 @@
+script {
+    tag = "1.0.${BUILD_NUMBER}"
+}
 pipeline{
     agent any
     stages{
@@ -10,7 +13,7 @@ pipeline{
                         sh """
                             whoami
                             pwd
-                            sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
+                            sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:${tag} nginx_docker
                         """
                     }
                 }
@@ -20,13 +23,20 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'DockerHubAccount', passwordVariable: 'DOCKERHUB_PWD', usernameVariable: 'DOCKHUB_USER')]) {
                     sh('echo $DOCKERHUB_PWD | sudo docker login -u=${DOCKHUB_USER} --password-stdin')
-                    sh('sudo docker push harryhu/simple-nginx:0.0.1')
+                    sh("sudo docker push harryhu/simple-nginx:${tag}")
                 }
             }
         }
         stage("Cleanup"){
             steps{
-                sh('sudo docker rmi harryhu/simple-nginx:0.0.1')
+                sh("sudo docker rmi harryhu/simple-nginx:${tag}")
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh """
+                    kubectl set image deployment/nginx -n nginx nginx-container=harryhu/simple-nginx:${tag}
+                """
             }
         }
     }
