@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage("Create Image"){
             steps{
-                dir("${env.WORKSPACE}/nginx_docker"){
+                dir("${env.WORKSPACE}"){
                     sh """
                         whoami
                         pwd
