@@ -6,12 +6,15 @@ pipeline{
                 echo "Creating image"
                 echo "${env.WORKSPACE}"
                 dir("${env.WORKSPACE}"){
-                    sh """
-                        whoami
-                        pwd
-                        sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
-                        sudo docker push harryhu/simple-nginx:0.0.1
-                    """
+                    withCredentials([usernamePassword(credentialsId: 'DockerHubAccount', passwordVariable: 'DOCKERHUB_PWD', usernameVariable: 'DOCKHUB_USER')]) {
+                        sh """
+                            whoami
+                            pwd
+                            sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:0.0.1 nginx_docker
+                            docker login -u="${DOCKHUB_USER}" -p="${DOCKERHUB_PWD}"
+                            sudo docker push harryhu/simple-nginx:0.0.1
+                        """
+                    }
                 }
             }
         }
