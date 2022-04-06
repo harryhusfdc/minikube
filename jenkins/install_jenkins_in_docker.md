@@ -8,7 +8,7 @@ Pre-required software
 
 Use docker run to install Jenkins. The Jenkins url is http://localhost:8080
 ```sh
-docker run -p 8080:8080 -p 50000:50000 -d -v /var/run/docker.sock:/var/run docker.sock -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker run -p 8080:8080 -p 50000:50000 -d -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
 
 Get docker container id
@@ -35,6 +35,13 @@ Install docker software in Jenkins (Docker in Docker)
 curl https://get.docker.com/ > dockerinstall
 chmod 777 dockerinstall
 ./dockerinstall
+```
+
+```sh
+apt-get update
+apt-get -y install sudo
+apt-get -y install vim
+
 ```
 
 Exit the Jenkins container and run the following command to add security
