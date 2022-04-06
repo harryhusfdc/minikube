@@ -1,8 +1,17 @@
 FROM jenkins/jenkins:lts-jdk11
+# The will force jenkins to run as root. Thus reduce some permission issue for Docker in Docker
 USER root
 RUN apt-get update 
 RUN apt-get install -y sudo
 RUN apt-get install make
 RUN apt-get install -y docker.io
-RUN docker --version
-
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+RUN touch /etc/apt/sources.list.d/kubernetes.list 
+Run echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+RUN apt-get update
+RUN apt-get install -y kubectl
+ADD minikube/config /root/.kube/config
+ADD minikube/ca.crt /root/.minikube/ca.crt
+ADD minikube/client.crt /root/.minikube/profiles/minikube/client.crt
+ADD minikube/client.key /root/.minikube/profiles/minikube/client.key
+RUN kubectl version
