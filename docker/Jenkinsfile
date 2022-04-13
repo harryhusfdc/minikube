@@ -12,7 +12,7 @@ pipeline{
                     sh """
                         whoami
                         pwd
-                        sudo docker build -f nginx_docker/Dockerfile -t harryhu/simple-nginx:${tag} nginx_docker
+                        sudo docker build -f docker/Dockerfile -t harryhu/simple-nginx:${tag} nginx_docker
                     """
                 }
             }
