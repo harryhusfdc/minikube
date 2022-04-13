@@ -8,6 +8,8 @@ Pre-required software
 
 Use docker run to install Jenkins. The Jenkins url is http://localhost:8080
 ```sh
+# Port 50000 is for java remote api which allow to connect a slave agent.
+# Mount a volume in the host machine and map it to /var/jenkins_home in container. 
 docker run -p 8080:8080 -p 50000:50000 -d -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
 
@@ -20,7 +22,7 @@ Run an interactive shell on the Jenkins container and get initial password. Use 
 ```sh
 # run this in the interactive shell on Jenkins container
 docker exec -it --user root <container id> bash
-cat /var/jenkins_home/secrets/initialAdminPassword
+
 ```
 
 Get Initial Password
