@@ -29,7 +29,7 @@ resource "kubernetes_deployment" "my_deployment" {
           image_pull_policy = "Always"
           name  = "nginx-container"
           port {
-            container_port = 80
+            container_port = "${var.port}"
           }
         }
       }
@@ -49,8 +49,9 @@ resource "kubernetes_service" "my_serivce" {
     type = "NodePort"
     port {
       node_port   = 30201
-      port        = 80
-      target_port = 80
+      port        = "${var.port}"
+      target_port = "${var.port}"
     }
   }
 }
+
