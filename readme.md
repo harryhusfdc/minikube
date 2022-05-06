@@ -19,7 +19,7 @@
 
 https://docs.docker.com/desktop/mac/install/
 
-## Virtualbox ##
+## Virtualbox (optional) ##
 
 ```
 brew install -cask virtualbox
